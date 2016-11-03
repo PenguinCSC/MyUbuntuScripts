@@ -1,0 +1,46 @@
+#!/bin/bash
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Adding PPAs..."
+
+add-apt-repository --yes ppa:nilarimogard/webupd8
+add-apt-repository --yes ppa:webupd8team/java
+add-apt-repository --yes ppa:tsbarnes/indicator-keylock
+add-apt-repository --yes ppa:webupd8team/nemo
+add-apt-repository --yes ppa:linrunner/tlp
+add-apt-repository --yes ppa:webupd8team/unstable
+add-apt-repository --yes ppa:atareao/atareao
+
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Updating Repositories Cache."
+apt -y update
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Upgrading System."
+apt -y upgrade
+apt -y dist-upgrade
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Removing Absolete Programs and Cleaning Up..."
+apt -y autoremove
+apt -y autoclean
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Installing Programs."
+
+apt install -y preload aptitude acpi gdebi mc tlp unity-tweak-tool tlp-rdw ppa-purge oracle-java9-installer nemo nemo-fileroller nemo-compare nemo-media-columns nemo-pastebin nemo-seahorse nemo-share nemo-emblems nemo-image-converter dconf-tools whois ncdu nmap guake pepperflashplugin-nonfree libreoffice-style-sifr 
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Unhiding Startup Applications."
+sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Starting TLP."
+tlp start
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Setting Up Nemo."
+
+gsettings set org.gnome.desktop.background show-desktop-icons false
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+nautilus -q
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Setting Up Plymouth Theme."
+update-alternatives --config default.plymouth
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Setting up Pepperflash Plugin."
+update-pepperflashplugin-nonfree --install
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Clearing History."
+cat /dev/null > ~/.bash_history && history -c && exit
+exit 0﻿

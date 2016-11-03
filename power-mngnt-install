@@ -1,0 +1,17 @@
+#!/bin/bash
+
+## This script add all necessary power management for laptops  ##
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Adding the TLP Repository."
+
+add-apt-repository --yes ppa:linrunner/tlp # TLP Repository
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Installing TLP Tools."
+
+apt -y install tlp tlp-rdw
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "Installing CPUFreq and Sensor Tools."
+
+apt -y install cpufrequtils indicator-cpufreq hddtemp lm-sensors psensor
+
+notify-send --icon=/usr/share/unity/icons/information_icon.svg "All Done!"

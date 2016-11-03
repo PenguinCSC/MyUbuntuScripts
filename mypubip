@@ -1,0 +1,14 @@
+/! /bin/bash
+
+###################################################
+## Name: My IP					 ##
+## Author: Amichai Rotman 	 		 ##
+## Last Update: 20161008 / 10:25 		 ##
+## URL: https://goo.gl/ZMAOWt                    ##	
+###################################################
+
+## Purpose: 					 ##
+## Find out the current public IP Adress 	 ##
+
+wget http://ipinfo.io/ip -qO -
+
