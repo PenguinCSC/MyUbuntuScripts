@@ -1,0 +1,24 @@
+/! /bin/bash
+
+###################################################
+## Name: Install ath10k driver on Lenovo E460 	 ##
+## Author: Amichai Rotman 	 		 ##
+## Last Update: 20160912 / 10:58 		 ##
+## URL: http://goo.gl/vqho5g 			 ##	
+###################################################
+
+## Purpose: 					 ##
+## Install and enable Qualcom Atheros Drivers 	 ##
+
+apt-get install build-essential linux-headers-$(uname -r) git
+echo "options ath10k_core skip_otp=y" | sudo tee /etc/modprobe.d/ath10k_core.conf
+wget https://www.kernel.org/pub/linux/kernel/projects/backports/2015/11/15/backports-20151115.tar.gz
+tar zxvf backports-20151115.tar.gz
+cd backports-20151115
+make defconfig-wifi
+make
+sudo make install
+git clone https://github.com/kvalo/ath10k-firmware.git
+sudo cp -r ath10k-firmware/QCA9377 /lib/firmware/ath10k/
+cp /lib/firmware/ath10k/QCA9377/hw1.0/firmware-5.bin_WLAN.TF.1.0-00267-1 /lib/firmware/ath10k/QCA9377/hw1.0/firmware-5.bin
+

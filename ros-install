@@ -1,0 +1,29 @@
+/! /bin/bash
+
+#########################################################
+## Name:ROS Installation Script			       ##
+## Author: Amichai Rotman 	 		       ##
+## Last Update: 20160912 / 09:14 		       ##	
+## URL: http://wiki.ros.org/indigo/Installation/Ubuntu ##
+#########################################################
+
+
+## Add DEB Repository to APT ##
+
+sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+
+## Add GPG Key to Keyring ##
+
+apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
+
+## Update repositories cache ##
+
+apt update
+
+## The actuall full ROS Desktop install ##
+
+sudo apt install -y ros-indigo-desktop-full
+
+
+
+
